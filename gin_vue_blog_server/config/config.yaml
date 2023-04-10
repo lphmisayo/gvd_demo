@@ -1,7 +1,8 @@
 Server:
   AppMode: debug # debug 开发环境, release 生产环境
-  BackPort: :8080 # 后台服务端口
-  FrontPort: :8080 # 前台服务端口
+  BackPort: ":8080" # 后台服务端口
+  FrontPort: ":8180" # 前台服务端口
+  UseMultipoint: true
 Mysql:
   Host: "127.0.0.1"
   Port: 3306
@@ -15,6 +16,7 @@ JWT:
   Expire: 24 # 过期时间 (小时)
   Issuer: gin-vue-blog-demo
 Redis:
+  Enable: true
   DB: 7
   Addr: 127.0.0.1:6379
   Password: ""

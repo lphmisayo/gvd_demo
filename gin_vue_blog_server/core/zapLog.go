@@ -1,7 +1,8 @@
-package utils
+package core
 
 import (
 	"gin_vue_blog_server/global"
+	"gin_vue_blog_server/utils"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"log"
@@ -11,7 +12,7 @@ import (
 )
 
 func InitLogger() {
-	if ok, _ := IsPathExist(global.Config.Zap.Directory); !ok {
+	if ok, _ := utils.IsPathExist(global.Config.Zap.Directory); !ok {
 		log.Printf("当前文件夹路径：%v 不存在，准备创建新文件夹\n", global.Config.Zap.Directory)
 		err := os.Mkdir(global.Config.Zap.Directory, os.ModePerm)
 		if err != nil {

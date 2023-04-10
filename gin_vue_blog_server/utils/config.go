@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	ConfigFile = "config/config.yml"
+	ConfigFile = "config/config.yaml"
 )
 
 func InitConfig() {

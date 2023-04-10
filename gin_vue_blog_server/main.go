@@ -5,5 +5,6 @@ import (
 )
 
 func main() {
-	routers.InitGlobalVariable()
+	routers.InitGlobalVariable() //初始化服务配置
+
 }
