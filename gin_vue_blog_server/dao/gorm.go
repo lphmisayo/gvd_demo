@@ -2,7 +2,7 @@ package dao
 
 import (
 	"fmt"
-	"gin_vue_blog_demo/global"
+	"gin_vue_blog_server/global"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"

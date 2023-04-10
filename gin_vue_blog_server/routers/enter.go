@@ -2,9 +2,9 @@ package routers
 
 import (
 	"fmt"
-	"gin_vue_blog_demo/dao"
-	"gin_vue_blog_demo/global"
-	"gin_vue_blog_demo/utils"
+	"gin_vue_blog_server/dao"
+	"gin_vue_blog_server/global"
+	"gin_vue_blog_server/utils"
 )
 
 // InitGlobalVariable 初始化全局变量

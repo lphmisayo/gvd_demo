@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"gin_vue_blog_demo/config"
-	"gin_vue_blog_demo/global"
+	"gin_vue_blog_server/config"
+	"gin_vue_blog_server/global"
 	"gopkg.in/yaml.v2"
 	"log"
 	"os"

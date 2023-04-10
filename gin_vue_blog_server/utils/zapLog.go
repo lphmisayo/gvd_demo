@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"gin_vue_blog_demo/global"
+	"gin_vue_blog_server/global"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"log"

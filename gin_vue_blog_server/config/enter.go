@@ -1,6 +1,6 @@
 package config
 
-import "gin_vue_blog_demo/config/config_model"
+import "gin_vue_blog_server/config/config_model"
 
 type Config struct {
 	Server  config_model.Server  `yaml:"Server"`

@@ -1,4 +1,4 @@
-module gin_vue_blog_demo
+module gin_vue_blog_server
 
 go 1.19
 

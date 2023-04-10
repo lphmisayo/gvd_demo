@@ -1,7 +1,7 @@
 package global
 
 import (
-	"gin_vue_blog_demo/config"
+	"gin_vue_blog_server/config"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
