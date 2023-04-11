@@ -1,7 +1,7 @@
 package config_model
 
 type JWT struct {
-	Secret string `yaml:"Secret"`
-	Expire string `yaml:"Expire"`
-	Issuer string `yaml:"Issuer"`
+	TokenKey string `yaml:"TokenKey" json:"token_key"`
+	Expire   string `yaml:"Expire" json:"expire"`
+	Issuer   string `yaml:"Issuer" json:"issuer"`
 }

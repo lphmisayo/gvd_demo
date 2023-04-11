@@ -12,4 +12,5 @@ type Config struct {
 	Email   config_model.Email   `yaml:"Email"`
 	Captcha config_model.Captcha `yaml:"Captcha"`
 	Zap     config_model.Zap     `yaml:"Zap"`
+	System  config_model.System  `yaml:"System"`
 }
