@@ -21,14 +21,14 @@ func Viper(path ...string) *viper.Viper {
 			if configEnv := os.Getenv(internal.ConfigEnv); configEnv == "" {
 				switch gin.Mode() {
 				case gin.DebugMode:
-					config = internal.ConfigDebugFile
-					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", gin.EnvGinMode, internal.ConfigDefaultFile)
+					config = internal.ConfigDefaultFile
+					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", internal.ConfigEnv, internal.ConfigDefaultFile)
 				case gin.ReleaseMode:
 					config = internal.ConfigReleaseFile
-					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", gin.EnvGinMode, internal.ConfigReleaseFile)
+					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", internal.ConfigEnv, internal.ConfigReleaseFile)
 				case gin.TestMode:
 					config = internal.ConfigTestFile
-					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", gin.EnvGinMode, internal.ConfigTestFile)
+					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", internal.ConfigEnv, internal.ConfigTestFile)
 				}
 			} else {
 				config = configEnv
@@ -40,7 +40,9 @@ func Viper(path ...string) *viper.Viper {
 		}
 	}
 
+	fmt.Println("当前配置路径:" + config)
 	v := viper.New()
+	//v.AddConfigPath(internal.ConfigDefaultPath)
 	v.SetConfigFile(config)
 	v.SetConfigType("yaml")
 	err := v.ReadInConfig()
@@ -50,11 +52,11 @@ func Viper(path ...string) *viper.Viper {
 	v.WatchConfig()
 	v.OnConfigChange(func(event fsnotify.Event) {
 		fmt.Println("配置文件被修改：", event.Name)
-		if err = v.Unmarshal(global.Config); err != nil {
+		if err = v.Unmarshal(&global.Config); err != nil {
 			fmt.Println("配置文件解析式错误，错误原因：", err)
 		}
 	})
-	if err = v.Unmarshal(global.Config); err != nil {
+	if err = v.Unmarshal(&global.Config); err != nil {
 		fmt.Println("配置文件解析式错误，错误原因：", err)
 	}
 

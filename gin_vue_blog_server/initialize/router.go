@@ -1,6 +1,9 @@
 package initialize
 
-/*func Routers() *gin.Engine {
-	Router := gin.Default()
-	InstallPlugin(Router) // 安装 插件
-}*/
+import "github.com/gin-gonic/gin"
+
+func Routers() *gin.Engine {
+	router := gin.Default()
+	//InstallPlugin(Router) // 安装 插件
+	return router
+}

@@ -9,7 +9,8 @@ Mysql:
   Config: ""
   Db: "gin_vue_db"
   User: root
-  Password: "123456"
+#  Password: "123456"
+  Password: lph991028
   Log_Level: error
 JWT:
   TokenKey: lphBlogPlus
