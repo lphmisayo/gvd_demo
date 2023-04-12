@@ -1,27 +1,14 @@
 package routers
 
 import (
-	"fmt"
-	"gin_vue_blog_server/core"
-	"gin_vue_blog_server/flag"
-	"gin_vue_blog_server/global"
-	"gin_vue_blog_server/initialize"
+	"gin_vue_blog_server/routers/system"
 )
 
-// InitGlobalVariable 初始化全局变量
-func InitGlobalVariable() {
-	//utils.InitConfig() //初始化配置文件
-	global.Viper = core.Viper()
-	fmt.Println(global.Config)
-	core.InitLogger() //初始化日志文件
-	global.DB = initialize.InitMysqlDB()
-
-	option := flag.Parse()
-	if flag.IsWebStop(option) { //需要执行后重启服务的指令，将进入此方法
-		flag.SwitchOption(option)
-		return
-	}
+type RouterGroup struct {
+	System system.RouterGroup
 }
+
+var RouterGroupApp RouterGroup
 
 /*func BackServer() *http.Server {
 	backPort := global.Config.Server.BackPort

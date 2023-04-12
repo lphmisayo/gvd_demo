@@ -1,4 +1,4 @@
-package core
+package initialize
 
 import (
 	"gin_vue_blog_server/global"

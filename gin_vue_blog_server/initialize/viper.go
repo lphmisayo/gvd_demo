@@ -1,9 +1,7 @@
-package core
+package initialize
 
 import (
-	"flag"
 	"fmt"
-	"gin_vue_blog_server/core/internal"
 	"gin_vue_blog_server/global"
 	"github.com/fsnotify/fsnotify"
 	"github.com/gin-gonic/gin"
@@ -11,24 +9,23 @@ import (
 	"os"
 )
 
-func Viper(path ...string) *viper.Viper {
-	var config string
+func Viper(config string, path ...string) *viper.Viper {
 
 	if len(path) == 0 {
-		flag.StringVar(&config, "c", "", "选择默认配置文件")
-		flag.Parse()
+		//flag.StringVar(&config, "c", "", "选择默认配置文件")
+		//flag.Parse()
 		if config == "" { //若命令行输入为空
-			if configEnv := os.Getenv(internal.ConfigEnv); configEnv == "" {
+			if configEnv := os.Getenv(global.ConfigEnv); configEnv == "" {
 				switch gin.Mode() {
 				case gin.DebugMode:
-					config = internal.ConfigDefaultFile
-					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", internal.ConfigEnv, internal.ConfigDefaultFile)
+					config = global.ConfigDefaultFile
+					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", global.ConfigEnv, global.ConfigDefaultFile)
 				case gin.ReleaseMode:
-					config = internal.ConfigReleaseFile
-					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", internal.ConfigEnv, internal.ConfigReleaseFile)
+					config = global.ConfigReleaseFile
+					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", global.ConfigEnv, global.ConfigReleaseFile)
 				case gin.TestMode:
-					config = internal.ConfigTestFile
-					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", internal.ConfigEnv, internal.ConfigTestFile)
+					config = global.ConfigTestFile
+					fmt.Printf("您现在是%s模式,配置文件路径为%s\n", global.ConfigEnv, global.ConfigTestFile)
 				}
 			} else {
 				config = configEnv
@@ -42,7 +39,7 @@ func Viper(path ...string) *viper.Viper {
 
 	fmt.Println("当前配置路径:" + config)
 	v := viper.New()
-	//v.AddConfigPath(internal.ConfigDefaultPath)
+	//v.AddConfigPath(global.ConfigDefaultPath)
 	v.SetConfigFile(config)
 	v.SetConfigType("yaml")
 	err := v.ReadInConfig()

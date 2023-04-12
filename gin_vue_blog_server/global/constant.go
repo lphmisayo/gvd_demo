@@ -1,4 +1,4 @@
-package internal
+package global
 
 const (
 	ConfigEnv         = "GVA_CONFIG"

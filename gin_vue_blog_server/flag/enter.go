@@ -1,27 +1,32 @@
 package flag
 
-import sys_flag "flag"
+import (
+	sys_flag "flag"
+	confM "gin_vue_blog_server/config/config_model"
+)
 
-type Option struct {
-	DB bool
-}
+func Parse() *confM.Option {
 
-func Parse() Option {
+	var config string
+
 	db := sys_flag.Bool("db", false, "初始化数据库")
+	sys_flag.StringVar(&config, "c", "", "选择默认配置文件")
+
 	sys_flag.Parse()
-	return Option{
-		DB: *db,
+	return &confM.Option{
+		DB:     *db,
+		Config: config,
 	}
 }
 
-func IsWebStop(option Option) bool {
+func IsWebStop(option *confM.Option) bool {
 	if option.DB {
 		return true
 	}
 	return false
 }
 
-func SwitchOption(option Option) {
+func SwitchOption(option *confM.Option) {
 	if option.DB {
 		MakeMigration()
 	}

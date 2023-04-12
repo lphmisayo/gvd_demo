@@ -1,9 +1,31 @@
 package initialize
 
-import "github.com/gin-gonic/gin"
+import (
+	"gin_vue_blog_server/global"
+	"gin_vue_blog_server/routers"
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
 
 func Routers() *gin.Engine {
-	router := gin.Default()
+	r := gin.Default()
 	//InstallPlugin(Router) // 安装 插件
-	return router
+
+	systemRouterGroup := routers.RouterGroupApp.System
+
+	//头像文件设置静态地址
+
+	//swagger
+
+	//配置路由
+	PublicGroup := r.Group(global.Config.System.RouterPrefix)
+	{
+		PublicGroup.GET("/health", func(c *gin.Context) {
+			c.JSON(http.StatusOK, "连接正常")
+		})
+	}
+	{
+		systemRouterGroup.InitBaseRouter(PublicGroup)
+	}
+	return r
 }

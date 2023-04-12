@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gin_vue_blog_server/global"
 	"gin_vue_blog_server/model/common"
+	"gin_vue_blog_server/model/system"
 )
 
 func MakeMigration() {
@@ -17,6 +18,7 @@ func MakeMigration() {
 			&common.Comment{},
 			&common.Tag{},
 			&common.Category{},
+			&system.JwtBlackList{},
 		)
 	if err != nil {
 		global.Logger.Error(err.Error())
