@@ -1,9 +1,12 @@
 package system
 
-import (
-	"gin_vue_blog_server/api/v1/system/inte"
-)
+import "gin_vue_blog_server/service"
 
 type ApiGroup struct {
-	inte.BaseApi
+	BaseApi
 }
+
+var (
+	userService = service.ServiceGroupApp.SystemServiceGroup.UserService
+	menuService = service.ServiceGroupApp.SystemServiceGroup.MenuService
+)

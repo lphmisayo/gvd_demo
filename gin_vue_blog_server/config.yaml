@@ -14,7 +14,8 @@ Mysql:
   Log_Level: error
 JWT:
   TokenKey: lphBlogPlus
-  Expire: 24 # 过期时间 (小时)
+  Expire: 7d # 过期时间 (小时)
+  Buffer: 1d
   Issuer: gin-vue-blog-demo
 Redis:
   Enable: true
@@ -42,6 +43,11 @@ Email:
 Captcha:
   SendEmail: true # 通过邮箱发送验证码
   ExpireTime: 15  # 过期时间 (分钟)
+  Key-long: 6
+  Img-Width: 240
+  Img-Height: 80
+  Open-Captcha: 0 # 0代表一直开启，大于0代表限制次数
+  Open-Captcha-Timeout: 3600 # open-captcha大于0时才生效
 Zap:
   Level: error
   Format: console
@@ -50,7 +56,7 @@ Zap:
   ShowLine: true
   LogInConsole: true
 System:
-  env: public # Change to "develop" to skip authentication for development mode
+  env: public # Change to "develop" to skip authentication for development mode 11
   addr: 8888
   db-type: mysql
   oss-type: local # 控制oss选择走本地还是 七牛等其他仓 自行增加其他oss仓可以在 server/utils/upload/upload.go 中 NewOss函数配置

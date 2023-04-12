@@ -36,6 +36,10 @@ func OkWithData(data interface{}, c *gin.Context) {
 	Result(http.StatusOK, SUCCESS, data, "查询成功", c)
 }
 
+func OkWithDataAndMsg(data interface{}, message string, c *gin.Context) {
+	Result(http.StatusOK, SUCCESS, data, message, c)
+}
+
 func Fail(c *gin.Context) {
 	Result(http.StatusOK, ERROR, map[string]interface{}{}, "操作失败！", c)
 }

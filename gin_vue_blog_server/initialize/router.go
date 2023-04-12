@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"gin_vue_blog_server/global"
+	"gin_vue_blog_server/middleware"
 	"gin_vue_blog_server/routers"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -27,5 +28,7 @@ func Routers() *gin.Engine {
 	{
 		systemRouterGroup.InitBaseRouter(PublicGroup)
 	}
+	PrivateGroup := r.Group(global.Config.System.RouterPrefix)
+	PrivateGroup.Use(middleware.JwtAuth()).Use(middleware.CasbinRabc())
 	return r
 }

@@ -1,4 +1,4 @@
-package inte
+package system
 
 type BaseApi struct {
 }

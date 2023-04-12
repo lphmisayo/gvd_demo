@@ -6,6 +6,9 @@ import (
 )
 
 func main() {
-	initialize.InitGlobalVariable() //初始化服务配置
+	ok := initialize.InitGlobalVariable() //初始化服务配置
+	if ok {
+		return
+	}
 	core.RunBackGroundServer()
 }

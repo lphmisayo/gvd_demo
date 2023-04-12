@@ -6,7 +6,7 @@ import (
 )
 
 // InitGlobalVariable 初始化全局变量
-func InitGlobalVariable() {
+func InitGlobalVariable() (stopServer bool) {
 	//初始化命令行操作
 	global.Option = flag.Parse()
 
@@ -19,9 +19,10 @@ func InitGlobalVariable() {
 
 	//初始化日志文件
 	InitLogger()
-
-	if flag.IsWebStop(global.Option) { //需要执行后重启服务的指令，将进入此方法
+	stopServer = flag.IsWebStop(global.Option)
+	if stopServer { //需要执行后重启服务的指令，将进入此方法
 		flag.SwitchOption(global.Option)
-		return
 	}
+
+	return stopServer
 }

@@ -5,6 +5,7 @@ import (
 	"gin_vue_blog_server/global"
 	"gin_vue_blog_server/model/system/request"
 	"github.com/golang-jwt/jwt/v4"
+	"time"
 )
 
 type JWT struct {
@@ -65,4 +66,20 @@ func (j *JWT) CreateTokenByOldToken(oldToken string, claims request.Claims) (str
 		return j.CreateToken(claims)
 	})
 	return v.(string), err
+}
+
+func (j *JWT) CreateClaims(baseClaims request.BaseClaims) request.Claims {
+	buffer, _ := ParseDuration(global.Config.JWT.Buffer)
+	expire, _ := ParseDuration(global.Config.JWT.Expire)
+	claims := request.Claims{
+		baseClaims,
+		int64(buffer / time.Second),
+		jwt.StandardClaims{
+			NotBefore: time.Now().Unix() - 1000,
+			ExpiresAt: time.Now().Add(expire).Unix(),
+			Issuer:    global.Config.JWT.Issuer,
+		},
+	}
+	return claims
+
 }
