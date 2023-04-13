@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (FileApi) ImageListView(c *gin.Context) {
+func (*FileApi) ImageListView(c *gin.Context) {
 	var pageInit model.PageInfo
 	err := c.ShouldBindJSON(&pageInit)
 	if err != nil {

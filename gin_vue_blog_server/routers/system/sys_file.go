@@ -8,7 +8,7 @@ import (
 type FileRouter struct {
 }
 
-func (FileRouter) InitFileRouter(Router *gin.RouterGroup) (ri gin.IRouter) {
+func (*FileRouter) InitFileRouter(Router *gin.RouterGroup) (ri gin.IRouter) {
 	fileRouter := Router.Group("file")
 	fileApi := v1.ApiGroupApp.FileApiGroup.FileApi
 	{
