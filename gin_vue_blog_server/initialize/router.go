@@ -26,7 +26,8 @@ func Routers() *gin.Engine {
 		})
 	}
 	{
-		systemRouterGroup.InitBaseRouter(PublicGroup)
+		systemRouterGroup.InitBaseRouter(PublicGroup) //初始化基础路由
+		systemRouterGroup.InitFileRouter(PublicGroup) //初始化文件路由
 	}
 	PrivateGroup := r.Group(global.Config.System.RouterPrefix)
 	PrivateGroup.Use(middleware.JwtAuth()).Use(middleware.CasbinRabc())

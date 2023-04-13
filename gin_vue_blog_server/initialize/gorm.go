@@ -3,6 +3,7 @@ package initialize
 import (
 	"fmt"
 	"gin_vue_blog_server/global"
+	"gin_vue_blog_server/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -22,7 +23,19 @@ func InitMysqlDB() *gorm.DB {
 		mysqlDB.Db,
 	)
 
-	db, err := gorm.Open(mysql.Open(dns), getGormConfig())
+	var mysqlLogger logger.Interface
+	var mysqlLogSt model.MysqlLogSt
+	if global.Config.System.Env == "debug" {
+		mysqlLogger = logger.Default.LogMode(logger.Info)
+		mysqlLogSt.Debug = true
+	} else {
+		mysqlLogger = logger.Default.LogMode(logger.Error) // 只打印错误的sql
+		mysqlLogSt.Debug = false
+	}
+	global.MysqlLogConfig = &mysqlLogSt
+
+	db, err := gorm.Open(mysql.Open(dns), getGormConfig(mysqlLogger))
+
 	if err != nil {
 		log.Fatal("Mysql连接失败，请检查参数")
 	}
@@ -38,10 +51,11 @@ func InitMysqlDB() *gorm.DB {
 	return db
 }
 
-func getGormConfig() *gorm.Config {
+func getGormConfig(logMode logger.Interface) *gorm.Config {
 	return &gorm.Config{
 		//设置日志模式
-		Logger: logger.Default.LogMode(getLogMode(global.Config.Mysql.LogLevel)),
+		//Logger: logger.Default.LogMode(getLogMode(global.Config.Mysql.LogLevel)),
+		Logger: logMode,
 		//禁用外键约束
 		DisableForeignKeyConstraintWhenMigrating: true,
 		//禁用默认事务（提升运行速度）

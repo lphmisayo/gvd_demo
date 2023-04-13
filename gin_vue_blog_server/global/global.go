@@ -3,6 +3,7 @@ package global
 import (
 	"gin_vue_blog_server/config"
 	"gin_vue_blog_server/config/config_model"
+	"gin_vue_blog_server/model"
 	"github.com/go-redis/redis/v8"
 	"github.com/songzhibin97/gkit/cache/local_cache"
 	"github.com/spf13/viper"
@@ -20,4 +21,5 @@ var (
 	BlackCache         local_cache.Cache
 	ConcurrencyControl = &singleflight.Group{}
 	Option             *config_model.Option
+	MysqlLogConfig     *model.MysqlLogSt
 )

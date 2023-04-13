@@ -10,5 +10,5 @@ func main() {
 	if ok {
 		return
 	}
-	core.RunBackGroundServer()
+	core.RunWindowsBackGroundServer()
 }

@@ -49,14 +49,14 @@ Captcha:
   Open-Captcha: 0 # 0代表一直开启，大于0代表限制次数
   Open-Captcha-Timeout: 3600 # open-captcha大于0时才生效
 Zap:
-  Level: error
+  Level: info
   Format: console
   Prefix: "[Gin-Vue-Blog]"
   Directory: log
   ShowLine: true
   LogInConsole: true
 System:
-  env: public # Change to "develop" to skip authentication for development mode 11
+  env: debug # Change to "develop" to skip authentication for development mode 11
   addr: 8888
   db-type: mysql
   oss-type: local # 控制oss选择走本地还是 七牛等其他仓 自行增加其他oss仓可以在 server/utils/upload/upload.go 中 NewOss函数配置
