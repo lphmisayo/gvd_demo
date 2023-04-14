@@ -72,5 +72,5 @@ func (LocalImageService) ImageUpload(file *multipart.FileHeader, filePath string
 	image.Model = model.Model{CreateAt: utils.GetNowTimeHasFormat()}
 	global.DB.Create(&image)
 
-	return utils.InitFileResponse(fileName, 0, response.SuccessMsg, response.SucMsg, nil)
+	return utils.InitFileResponse(fileName, 0, response.ImageUploadSuccess, response.SucMsg, nil)
 }

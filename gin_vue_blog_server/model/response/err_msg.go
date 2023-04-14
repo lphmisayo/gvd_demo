@@ -1,10 +1,5 @@
 package response
 
-import (
-	"gin_vue_blog_server/global"
-	"strconv"
-)
-
 // 错误信息对应表
 type MsgType int
 type MsgStrKey int
@@ -26,7 +21,7 @@ const (
 var (
 	ImageMsgMap = map[MsgStrKey]string{
 		ImageUploadTypeErr: "上传失败，图片文件类型不匹配！",
-		ImageUploadSizeErr: "上传失败，图片大小超过限制大小 (" + strconv.FormatInt(global.Config.Upload.ImageSize, 10) + "MB)!",
+		ImageUploadSizeErr: "上传失败，图片大小超过限制大小",
 	}
 
 	FileMsgMap = map[MsgStrKey]string{

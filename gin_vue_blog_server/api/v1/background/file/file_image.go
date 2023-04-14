@@ -5,6 +5,7 @@ import (
 	"gin_vue_blog_server/global"
 	"gin_vue_blog_server/model"
 	"gin_vue_blog_server/model/common"
+	"gin_vue_blog_server/model/request"
 	"gin_vue_blog_server/model/response"
 	"gin_vue_blog_server/service/file"
 	"gin_vue_blog_server/utils"
@@ -28,6 +29,11 @@ func (*FileApi) ImageListView(c *gin.Context) {
 	}
 
 	response.OkWithList(fileList, count, "图片列表获取成功！", c)
+}
+
+func (*FileApi) ImageUpdateView(c *gin.Context) {
+	var fileReq request.FileRequest
+	c.ShouldBindJSON(&fileReq)
 }
 
 func (*FileApi) ImageUploadView(c *gin.Context) {
