@@ -13,6 +13,7 @@ func (*FileRouter) InitFileRouter(Router *gin.RouterGroup) (ri gin.IRouter) {
 	fileApi := v1.ApiGroupApp.FileApiGroup.FileApi
 	{
 		fileRouter.GET("/images", fileApi.ImageListView)
+		fileRouter.POST("/images", fileApi.ImageUploadView)
 	}
 	return fileRouter
 }

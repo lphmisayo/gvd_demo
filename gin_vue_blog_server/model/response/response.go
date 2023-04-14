@@ -64,6 +64,14 @@ func FailWithDataAndMsg(data interface{}, message string, c *gin.Context) {
 	Result(http.StatusOK, ERROR, data, message, c)
 }
 
+func FailWithCode(code ErrCode, c *gin.Context) {
+	msg, ok := ErrMap[code]
+	if !ok {
+		Result(http.StatusOK, ERROR, map[string]interface{}{}, "未知错误", c)
+	}
+	Result(http.StatusOK, ERROR, map[string]interface{}{}, msg, c)
+}
+
 func FailWithJwtFailed(data interface{}, message string, c *gin.Context) {
 	//Jwt鉴权错误，返回400
 	Result(http.StatusBadRequest, ERROR, data, message, c)

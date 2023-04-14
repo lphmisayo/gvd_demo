@@ -6,4 +6,6 @@ type Upload struct {
 	StorePath   string `yaml:"StorePath"`   //本地文件存储路径
 	MdPath      string `yaml:"MdPath"`      //Markdown 访问路径
 	MdStorePath string `yaml:"MdStorePath"` //Markdown 存储路径
+	ImageSize   int64  `yaml:"ImageSize"`   //图片上传大小限制 MB
+
 }

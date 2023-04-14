@@ -10,5 +10,6 @@ type ApiGroup struct {
 }
 
 var (
-	localFileService = service.ServiceGroupApp.FileServiceGroup.LocalFileService
+	localFileService  = service.ServiceGroupApp.FileServiceGroup.LocalFileService
+	localImageService = service.ServiceGroupApp.FileServiceGroup.LocalImageService
 )
