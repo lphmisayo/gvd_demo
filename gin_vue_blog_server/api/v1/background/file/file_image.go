@@ -15,7 +15,7 @@ import (
 	"path"
 )
 
-func (*FileApi) ImageListView(c *gin.Context) {
+func (*ImageApi) ImageListView(c *gin.Context) {
 	var pageInit model.PageInfo
 	err := c.ShouldBindJSON(&pageInit)
 	if err != nil {
@@ -32,7 +32,7 @@ func (*FileApi) ImageListView(c *gin.Context) {
 	response.OkWithList(fileList, count, "图片列表获取成功！", c)
 }
 
-func (*FileApi) ImageUpdateView(c *gin.Context) {
+func (*ImageApi) ImageUpdateView(c *gin.Context) {
 	var fileReq request.FileRequest
 	err := c.ShouldBindJSON(&fileReq)
 	if err != nil {
@@ -61,7 +61,7 @@ func (*FileApi) ImageUpdateView(c *gin.Context) {
 	response.OkWithMessage("更新成功！", c)
 }
 
-func (*FileApi) ImageUploadView(c *gin.Context) {
+func (*ImageApi) ImageUploadView(c *gin.Context) {
 	images, err := c.MultipartForm()
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
@@ -94,7 +94,7 @@ func (*FileApi) ImageUploadView(c *gin.Context) {
 	response.OkWithData(UploadFiles, c)
 }
 
-func (*FileApi) ImageDeleteView(c *gin.Context) {
+func (*ImageApi) ImageDeleteView(c *gin.Context) {
 	var fileReq request.FileRequest
 	err := c.ShouldBindJSON(&fileReq)
 	if err != nil {

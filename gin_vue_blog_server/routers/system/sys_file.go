@@ -10,7 +10,7 @@ type FileRouter struct {
 
 func (*FileRouter) InitFileRouter(Router *gin.RouterGroup) (ri gin.IRouter) {
 	fileRouter := Router.Group("file")
-	fileApi := v1.ApiGroupApp.FileApiGroup.FileApi
+	fileApi := v1.ApiGroupApp.FileApiGroup.ImageApi
 	{
 		fileRouter.GET("/images", fileApi.ImageListView)
 		fileRouter.POST("/images", fileApi.ImageUploadView)

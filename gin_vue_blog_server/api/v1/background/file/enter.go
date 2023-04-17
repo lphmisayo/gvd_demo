@@ -2,11 +2,11 @@ package file
 
 import "gin_vue_blog_server/service"
 
-type FileApi struct {
+type ImageApi struct {
 }
 
 type ApiGroup struct {
-	FileApi
+	ImageApi
 }
 
 var (
