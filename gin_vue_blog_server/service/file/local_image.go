@@ -1,10 +1,12 @@
 package file
 
 import (
+	"errors"
 	"gin_vue_blog_server/global"
 	"gin_vue_blog_server/model"
 	ctype "gin_vue_blog_server/model/cType"
 	"gin_vue_blog_server/model/common"
+	"gin_vue_blog_server/model/request"
 	"gin_vue_blog_server/model/response"
 	"gin_vue_blog_server/utils"
 	"go.uber.org/zap"
@@ -73,4 +75,40 @@ func (LocalImageService) ImageUpload(file *multipart.FileHeader, filePath string
 	global.DB.Create(&image)
 
 	return utils.InitFileResponse(fileName, 0, response.ImageUploadSuccess, response.SucMsg, nil)
+}
+
+func (LocalImageService) ImageUpdate(fileReq request.FileRequest) error {
+	if global.DB == nil {
+		return errors.New("数据库未初始化！")
+	}
+	var updateImage common.Image
+	updateImage.Name = fileReq.Name
+	updateImage.ID = uint(fileReq.ID)
+	err := global.DB.Model(common.Image{}).Where("id = ?", updateImage.ID).Update("name", updateImage.Name).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (LocalImageService) CheckImageIsExist(fileReq request.FileRequest) (bool, int, error) {
+	if global.DB == nil {
+		return false, -1, nil
+	}
+	err := global.DB.Model(common.Image{}).Where("id = ?", fileReq.ID).Error
+	if err != nil {
+		return false, -2, err
+	}
+	return true, 0, nil
+}
+
+func (LocalImageService) ImageDelete(fileReq request.FileRequest) error {
+	if global.DB == nil {
+		return errors.New("数据库未初始化！")
+	}
+	err := global.DB.Delete(&common.Image{}, fileReq.ID).Error
+	if err != nil {
+		return err
+	}
+	return nil
 }

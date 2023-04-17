@@ -14,6 +14,8 @@ func (*FileRouter) InitFileRouter(Router *gin.RouterGroup) (ri gin.IRouter) {
 	{
 		fileRouter.GET("/images", fileApi.ImageListView)
 		fileRouter.POST("/images", fileApi.ImageUploadView)
+		fileRouter.PUT("/images", fileApi.ImageUpdateView)
+		fileRouter.DELETE("/images", fileApi.ImageDeleteView)
 	}
 	return fileRouter
 }

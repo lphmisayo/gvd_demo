@@ -1,6 +1,7 @@
 package file
 
 import (
+	"errors"
 	"fmt"
 	"gin_vue_blog_server/global"
 	"gin_vue_blog_server/model"
@@ -33,7 +34,31 @@ func (*FileApi) ImageListView(c *gin.Context) {
 
 func (*FileApi) ImageUpdateView(c *gin.Context) {
 	var fileReq request.FileRequest
-	c.ShouldBindJSON(&fileReq)
+	err := c.ShouldBindJSON(&fileReq)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	isExist, errType, dbErr := localImageService.CheckImageIsExist(fileReq)
+	if !isExist {
+		if errType == -1 {
+			response.FailWithMessage(errors.New("数据库未初始化").Error(), c)
+			return
+		} else if errType == -2 {
+			response.FailWithMessage(dbErr.Error(), c)
+			return
+		} else {
+			response.FailWithMessage(errors.New("未知错误，无法检查图片是否存在！").Error(), c)
+		}
+	}
+
+	err = localImageService.ImageUpdate(fileReq)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	response.OkWithMessage("更新成功！", c)
 }
 
 func (*FileApi) ImageUploadView(c *gin.Context) {
@@ -67,4 +92,19 @@ func (*FileApi) ImageUploadView(c *gin.Context) {
 	}
 
 	response.OkWithData(UploadFiles, c)
+}
+
+func (*FileApi) ImageDeleteView(c *gin.Context) {
+	var fileReq request.FileRequest
+	err := c.ShouldBindJSON(&fileReq)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	err = localImageService.ImageDelete(fileReq)
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+	response.OkWithMessage("删除成功！", c)
 }
