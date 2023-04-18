@@ -13,6 +13,8 @@ type Article struct {
 	Status      int8   `json:"status" gorm:"type:tinyint"`
 	AuthorId    int    `json:"author_id" gorm:"type:int"`
 	ImageId     int    `json:"image_id" gorm:"type:int"`
+	Stars       int    `json:"stars" gorm:"type:int"`
+	Likes       int    `json:"likes" gorm:"type:int"`
 
 	Author   User      `json:"author" gorm:"-"`
 	Image    Image     `json:"image" gorm:"-"`

@@ -1,6 +1,7 @@
 package service
 
 import (
+	"gin_vue_blog_server/service/article"
 	"gin_vue_blog_server/service/file"
 	"gin_vue_blog_server/service/system"
 )
@@ -8,6 +9,7 @@ import (
 var ServiceGroupApp = new(ServiceGroup)
 
 type ServiceGroup struct {
-	SystemServiceGroup system.ServiceGroup
-	FileServiceGroup   file.ServiceGroup
+	SystemServiceGroup  system.ServiceGroup
+	FileServiceGroup    file.ServiceGroup
+	ArticleServiceGroup article.ServiceGroup
 }
